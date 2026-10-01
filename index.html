@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ItsAradMc Tools</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, Tahoma, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    color:white;
+    background:
+        radial-gradient(circle at top left,#35156b 0%,transparent 30%),
+        radial-gradient(circle at bottom right,#064b61 0%,transparent 30%),
+        #070a10;
+}
+
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:55px 20px 35px;
+}
+
+.logo{
+    font-size:45px;
+    font-weight:900;
+    letter-spacing:2px;
+
+    background:linear-gradient(90deg,#a66cff,#00e5ff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.subtitle{
+    margin-top:12px;
+    color:#929daf;
+    font-size:16px;
+}
+
+.creator{
+    display:inline-block;
+    margin-top:20px;
+    padding:9px 18px;
+    border-radius:12px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    color:#8f9aaa;
+}
+
+.creator strong{
+    color:white;
+}
+
+/* CONTAINER */
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+/* TOOLS GRID */
+
+.tools{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.tool{
+    padding:25px 18px;
+    min-height:150px;
+
+    background:rgba(17,22,32,.85);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+
+    cursor:pointer;
+    transition:.25s;
+
+    text-align:center;
+}
+
+.tool:hover{
+    transform:translateY(-6px);
+    border-color:#7652d9;
+    box-shadow:0 15px 40px rgba(91,50,180,.2);
+}
+
+.icon{
+    font-size:40px;
+    margin-bottom:14px;
+}
+
+.tool h3{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.tool p{
+    color:#7f8a9c;
+    font-size:13px;
+}
+
+/* TOOL PANEL */
+
+.panel{
+    display:none;
+    margin-top:25px;
+    padding:30px;
+
+    background:rgba(14,19,28,.95);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:22px;
+}
+
+.panel.active{
+    display:block;
+}
+
+.panel h2{
+    margin-bottom:20px;
+}
+
+/* INPUT */
+
+input, textarea, select{
+    width:100%;
+    padding:13px;
+
+    background:#090d14;
+    color:white;
+
+    border:1px solid #283142;
+    border-radius:10px;
+
+    outline:none;
+    font-size:15px;
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#8b5cf6;
+}
+
+/* BUTTON */
+
+button{
+    border:0;
+    padding:13px 20px;
+    margin-top:12px;
+
+    border-radius:10px;
+
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:linear-gradient(90deg,#7c3aed,#06b6d4);
+
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+/* CALCULATOR */
+
+.calculator{
+    max-width:330px;
+    margin:auto;
+}
+
+.calc-display{
+    height:65px;
+    margin-bottom:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    padding:15px;
+
+    background:#070a0f;
+    border:1px solid #273040;
+    border-radius:12px;
+
+    font-size:25px;
+    overflow:hidden;
+}
+
+.calc-buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+}
+
+.calc-buttons button{
+    margin:0;
+    padding:18px 5px;
+}
+
+/* RESULT */
+
+.result{
+    margin-top:18px;
+    padding:18px;
+
+    background:#090e16;
+    border:1px solid #252e3d;
+    border-radius:12px;
+
+    text-align:center;
+    font-size:22px;
+}
+
+/* TIMER */
+
+.timer{
+    text-align:center;
+    font-size:60px;
+    font-weight:900;
+    margin:20px;
+}
+
+/* TEXT */
+
+.text-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:15px;
+}
+
+.text-stat{
+    padding:18px;
+    background:#0a0f17;
+    border:1px solid #242d3b;
+    border-radius:12px;
+    text-align:center;
+}
+
+.text-stat strong{
+    display:block;
+    font-size:25px;
+    margin-top:7px;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    color:#586375;
+    padding:45px 20px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .tools{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:500px){
+
+    .logo{
+        font-size:32px;
+    }
+
+    .tools{
+        grid-template-columns:1fr;
+    }
+
+    .panel{
+        padding:20px;
+    }
+
+    .text-stats{
+        grid-template-columns:1fr;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        ⚡ ItsAradMc Tools
+    </div>
+
+    <div class="subtitle">
+        ابزارهای کاربردی، سریع و رایگان
+    </div>
+
+    <div class="creator">
+        Made by <strong>ItsAradMc</strong>
+    </div>
+
+</header>
+
+
+<main class="container">
+
+<section class="tools">
+
+    <div class="tool" onclick="openTool('calculator')">
+        <div class="icon">🧮</div>
+        <h3>ماشین حساب</h3>
+        <p>محاسبات سریع</p>
+    </div>
+
+    <div class="tool" onclick="openTool('password')">
+        <div class="icon">🔐</div>
+        <h3>تولید رمز</h3>
+        <p>ساخت رمز تصادفی</p>
+    </div>
+
+    <div class="tool" onclick="openTool('timer')">
+        <div class="icon">⏱️</div>
+        <h3>تایمر</h3>
+        <p>شمارش معکوس</p>
+    </div>
+
+    <div class="tool" onclick="openTool('stopwatch')">
+        <div class="icon">⏲️</div>
+        <h3>کرنومتر</h3>
+        <p>اندازه‌گیری زمان</p>
+    </div>
+
+    <div class="tool" onclick="openTool('dice')">
+        <div class="icon">🎲</div>
+        <h3>تاس</h3>
+        <p>تاس آنلاین</p>
+    </div>
+
+    <div class="tool" onclick="openTool('coin')">
+        <div class="icon">🪙</div>
+        <h3>شیر یا خط</h3>
+        <p>انتخاب تصادفی</p>
+    </div>
+
+    <div class="tool" onclick="openTool('converter')">
+        <div class="icon">📏</div>
+        <h3>تبدیل واحد</h3>
+        <p>تبدیل اندازه‌ها</p>
+    </div>
+
+    <div class="tool" onclick="openTool('text')">
+        <div class="icon">📝</div>
+        <h3>ابزار متن</h3>
+        <p>شمارش کلمات و حروف</p>
+    </div>
+
+</section>
+
+
+<!-- CALCULATOR -->
+
+<section class="panel" id="calculator">
+
+    <h2>🧮 ماشین حساب</h2>
+
+    <div class="calculator">
+
+        <div class="calc-display" id="calcDisplay">
+            0
+        </div>
+
+        <div class="calc-buttons">
+
+            <button onclick="clearCalc()">C</button>
+            <button onclick="addCalc('(')">(</button>
+            <button onclick="addCalc(')')">)</button>
+            <button onclick="addCalc('/')">÷</button>
+
+            <button onclick="addCalc('7')">7</button>
+            <button onclick="addCalc('8')">8</button>
+            <button onclick="addCalc('9')">9</button>
+            <button onclick="addCalc('*')">×</button>
+
+            <button onclick="addCalc('4')">4</button>
+            <button onclick="addCalc('5')">5</button>
+            <button onclick="addCalc('6')">6</button>
+            <button onclick="addCalc('-')">−</button>
+
+            <button onclick="addCalc('1')">1</button>
+            <button onclick="addCalc('2')">2</button>
+            <button onclick="addCalc('3')">3</button>
+            <button onclick="addCalc('+')">+</button>
+
+            <button onclick="addCalc('0')">0</button>
+            <button onclick="addCalc('.')">.</button>
+            <button onclick="calculate()" style="grid-column:span 2">=</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PASSWORD -->
+
+<section class="panel" id="password">
+
+    <h2>🔐 تولیدکننده رمز</h2>
+
+    <label>طول رمز:</label>
+
+    <input
+        type="number"
+        id="passwordLength"
+        value="16"
+        min="4"
+        max="64"
+    >
+
+    <button onclick="generatePassword()">
+        تولید رمز
+    </button>
+
+    <div class="result" id="passwordResult">
+        -
+    </div>
+
+</section>
+
+
+<!-- TIMER -->
+
+<section class="panel" id="timer">
+
+    <h2>⏱️ تایمر</h2>
+
+    <input
+        type="number"
+        id="timerMinutes"
+        placeholder="دقیقه"
+        min="0"
+    >
+
+    <input
+        type="number"
+        id="timerSeconds"
+        placeholder="ثانیه"
+        min="0"
+    >
+
+    <button onclick="startTimer()">
+        شروع
+    </button>
+
+    <button onclick="resetTimer()">
+        ریست
+    </button>
+
+    <div class="timer" id="timerDisplay">
+        00:00
+    </div>
+
+</section>
+
+
+<!-- STOPWATCH -->
+
+<section class="panel" id="stopwatch">
+
+    <h2>⏲️ کرنومتر</h2>
+
+    <div class="timer" id="stopwatchDisplay">
+        00:00:00
+    </div>
+
+    <button onclick="startStopwatch()">
+        شروع
+    </button>
+
+    <button onclick="stopStopwatch()">
+        توقف
+    </button>
+
+    <button onclick="resetStopwatch()">
+        ریست
+    </button>
+
+</section>
+
+
+<!-- DICE -->
+
+<section class="panel" id="dice">
+
+    <h2>🎲 تاس آنلاین</h2>
+
+    <div class="result" id="diceResult">
+        🎲
+    </div>
+
+    <button onclick="rollDice()">
+        انداختن تاس
+    </button>
+
+</section>
+
+
+<!-- COIN -->
+
+<section class="panel" id="coin">
+
+    <h2>🪙 شیر یا خط</h2>
+
+    <div class="result" id="coinResult">
+        🪙
+    </div>
+
+    <button onclick="flipCoin()">
+        پرتاب سکه
+    </button>
+
+</section>
+
+
+<!-- CONVERTER -->
+
+<section class="panel" id="converter">
+
+    <h2>📏 تبدیل واحد</h2>
+
+    <input
+        type="number"
+        id="convertInput"
+        placeholder="مقدار"
+    >
+
+    <select id="convertType">
+
+        <option value="km-m">
+            کیلومتر → متر
+        </option>
+
+        <option value="m-km">
+            متر → کیلومتر
+        </option>
+
+        <option value="kg-g">
+            کیلوگرم → گرم
+        </option>
+
+        <option value="g-kg">
+            گرم → کیلوگرم
+        </option>
+
+        <option value="mb-gb">
+            MB → GB
+        </option>
+
+        <option value="gb-mb">
+            GB → MB
+        </option>
+
+    </select>
+
+    <button onclick="convertUnit()">
+        تبدیل
+    </button>
+
+    <div class="result" id="convertResult">
+        -
+    </div>
+
+</section>
+
+
+<!-- TEXT -->
+
+<section class="panel" id="text">
+
+    <h2>📝 ابزار متن</h2>
+
+    <textarea
+        id="textInput"
+        oninput="countText()"
+        placeholder="متنت رو اینجا بنویس..."
+    ></textarea>
+
+    <div class="text-stats">
+
+        <div class="text-stat">
+            حروف
+            <strong id="charCount">0</strong>
+        </div>
+
+        <div class="text-stat">
+            کلمات
+            <strong id="wordCount">0</strong>
+        </div>
+
+        <div class="text-stat">
+            خطوط
+            <strong id="lineCount">0</strong>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    ⚡ ItsAradMc Tools
+
+    <br><br>
+
+    ساخته شده با HTML • CSS • JavaScript
+
+</footer>
+
+
+<script>
+
+/* OPEN TOOL */
+
+function openTool(id){
+
+    document.querySelectorAll(".panel")
+    .forEach(panel => {
+        panel.classList.remove("active");
+    });
+
+    document.getElementById(id)
+    .classList.add("active");
+
+    document.getElementById(id)
+    .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+}
+
+
+/* CALCULATOR */
+
+let calcValue = "";
+
+function addCalc(value){
+
+    calcValue += value;
+
+    document.getElementById("calcDisplay")
+    .textContent = calcValue;
+
+}
+
+function clearCalc(){
+
+    calcValue = "";
+
+    document.getElementById("calcDisplay")
+    .textContent = "0";
+
+}
+
+function calculate(){
+
+    try{
+
+        calcValue = String(
+            Function("return " + calcValue)()
+        );
+
+        document.getElementById("calcDisplay")
+        .textContent = calcValue;
+
+    }
+
+    catch{
+
+        document.getElementById("calcDisplay")
+        .textContent = "Error";
+
+        calcValue = "";
+
+    }
+
+}
+
+
+/* PASSWORD */
+
+function generatePassword(){
+
+    const length =
+        Number(document.getElementById("passwordLength").value);
+
+    const chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=";
+
+    let password = "";
+
+    for(let i=0;i<length;i++){
+
+        password +=
+            chars[Math.floor(Math.random()*chars.length)];
+
+    }
+
+    document.getElementById("passwordResult")
+    .textContent = password;
+
+}
+
+
+/* TIMER */
+
+let timerInterval;
+
+let timerTotal = 0;
+
+function startTimer(){
+
+    const minutes =
+        Number(document.getElementById("timerMinutes").value) || 0;
+
+    const seconds =
+        Number(document.getElementById("timerSeconds").value) || 0;
+
+    timerTotal =
+        minutes * 60 + seconds;
+
+    clearInterval(timerInterval);
+
+    updateTimer();
+
+    timerInterval = setInterval(()=>{
+
+        timerTotal--;
+
+        updateTimer();
+
+        if(timerTotal <= 0){
+
+            clearInterval(timerInterval);
+
+            alert("⏰ زمان تمام شد!");
+
+        }
+
+    },1000);
+
+}
+
+function updateTimer(){
+
+    const min =
+        Math.floor(timerTotal/60);
+
+    const sec =
+        timerTotal%60;
+
+    document.getElementById("timerDisplay")
+    .textContent =
+        String(min).padStart(2,"0")
+        + ":"
+        + String(sec).padStart(2,"0");
+
+}
+
+function resetTimer(){
+
+    clearInterval(timerInterval);
+
+    timerTotal = 0;
+
+    updateTimer();
+
+}
+
+
+/* STOPWATCH */
+
+let stopwatchTime = 0;
+
+let stopwatchInterval;
+
+function startStopwatch(){
+
+    clearInterval(stopwatchInterval);
+
+    stopwatchInterval = setInterval(()=>{
+
+        stopwatchTime++;
+
+        updateStopwatch();
+
+    },1000);
+
+}
+
+function stopStopwatch(){
+
+    clearInterval(stopwatchInterval);
+
+}
+
+function resetStopwatch(){
+
+    clearInterval(stopwatchInterval);
+
+    stopwatchTime = 0;
+
+    updateStopwatch();
+
+}
+
+function updateStopwatch(){
+
+    const hours =
+        Math.floor(stopwatchTime/3600);
+
+    const minutes =
+        Math.floor((stopwatchTime%3600)/60);
+
+    const seconds =
+        stopwatchTime%60;
+
+    document.getElementById("stopwatchDisplay")
+    .textContent =
+        String(hours).padStart(2,"0")
+        + ":"
+        + String(minutes).padStart(2,"0")
+        + ":"
+        + String(seconds).padStart(2,"0");
+
+}
+
+
+/* DICE */
+
+function rollDice(){
+
+    const number =
+        Math.floor(Math.random()*6)+1;
+
+    const diceFaces =
+        ["⚀","⚁","⚂","⚃","⚄","⚅"];
+
+    document.getElementById("diceResult")
+    .textContent =
+        diceFaces[number-1] + "  " + number;
+
+}
+
+
+/* COIN */
+
+function flipCoin(){
+
+    const result =
+        Math.random() < .5
+        ? "🟢 شیر"
+        : "🔵 خط";
+
+    document.getElementById("coinResult")
+    .textContent = result;
+
+}
+
+
+/* CONVERTER */
+
+function convertUnit(){
+
+    const value =
+        Number(document.getElementById("convertInput").value);
+
+    const type =
+        document.getElementById("convertType").value;
+
+    let result;
+
+    if(type === "km-m"){
+        result = value * 1000;
+    }
+
+    else if(type === "m-km"){
+        result = value / 1000;
+    }
+
+    else if(type === "kg-g"){
+        result = value * 1000;
+    }
+
+    else if(type === "g-kg"){
+        result = value / 1000;
+    }
+
+    else if(type === "mb-gb"){
+        result = value / 1024;
+    }
+
+    else if(type === "gb-mb"){
+        result = value * 1024;
+    }
+
+    document.getElementById("convertResult")
+    .textContent = result;
+
+}
+
+
+/* TEXT COUNTER */
+
+function countText(){
+
+    const text =
+        document.getElementById("textInput").value;
+
+    const chars =
+        text.length;
+
+    const words =
+        text.trim()
+        ? text.trim().split(/\s+/).length
+        : 0;
+
+    const lines =
+        text
+        ? text.split("\n").length
+        : 0;
+
+    document.getElementById("charCount")
+    .textContent = chars;
+
+    document.getElementById("wordCount")
+    .textContent = words;
+
+    document.getElementById("lineCount")
+    .textContent = lines;
+
+}
+
+</script>
+
+</body>
+</html>
